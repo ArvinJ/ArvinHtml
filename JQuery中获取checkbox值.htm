@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+	 <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+        }
+        td
+        {
+            border: 1px solid #ccc;
+        }
+    </style>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 全选
+            $("#btnCheckAll").bind("click", function () {
+                $("[name = chkItem]:checkbox").attr("checked", true);
+            });
+ 
+            // 全不选
+            $("#btnCheckNone").bind("click", function () {
+                $("[name = chkItem]:checkbox").attr("checked", false);
+            });
+ 
+            // 反选
+            $("#btnCheckReverse").bind("click", function () {
+                $("[name = chkItem]:checkbox").each(function () {
+                    $(this).attr("checked", !$(this).attr("checked"));
+                });
+            });
+ 
+            // 全不选
+            $("#btnSubmit").bind("click", function () {
+                var result = new Array();
+                $("[name = chkItem]:checkbox").each(function () {
+                    if ($(this).is(":checked")) {
+                        result.push($(this).attr("value"));
+                    }
+                });
+ 
+                alert(result.join(","));
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <input name="chkItem" type="checkbox" value="今日话题" />今日话题
+        <input name="chkItem" type="checkbox" value="视觉焦点" />视觉焦点
+        <input name="chkItem" type="checkbox" value="财经" />财经
+        <input name="chkItem" type="checkbox" value="汽车" />汽车
+        <input name="chkItem" type="checkbox" value="科技" />科技
+        <input name="chkItem" type="checkbox" value="房产" />房产
+        <input name="chkItem" type="checkbox" value="旅游" />旅游
+    </div>
+    <div>
+        <input id="btnCheckAll" type="button" value="全选" />
+        <input id="btnCheckNone" type="button" value="全不选" />
+        <input id="btnCheckReverse" type="button" value="反选" />
+        <input id="btnSubmit" type="button" value="提交" />
+    </div>
+	
+	<table id="tb">
+        <thead>
+            <tr>
+                <td>
+                    <input id="chkAll" type="checkbox" />
+                </td>
+                <td>
+                    分类名称
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input name="chkItem" type="checkbox" value="今日话题" />
+                </td>
+                <td>
+                    今日话题
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="chkItem" type="checkbox" value="视觉焦点" />
+                </td>
+                <td>
+                    视觉焦点
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="chkItem" type="checkbox" value="财经" />
+                </td>
+                <td>
+                    财经
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="chkItem" type="checkbox" value="汽车" />
+                </td>
+                <td>
+                    汽车
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="chkItem" type="checkbox" value="科技" />
+                </td>
+                <td>
+                    科技
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="chkItem" type="checkbox" value="房产" />
+                </td>
+                <td>
+                    房产
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input name="chkItem" type="checkbox" value="旅游" />
+                </td>
+                <td>
+                    旅游
+                </td>
+            </tr>
+        </tbody>
+    </table>
+	<script type="text/javascript">
+        $(function () {
+            // chkAll全选事件
+            $("#chkAll").bind("click", function () {
+                $("[name = chkItem]:checkbox").attr("checked", this.checked);
+            });
+ 
+            // chkItem事件
+            $("[name = chkItem]:checkbox").bind("click", function () {
+                var $chk = $("[name = chkItem]:checkbox");
+                $("#chkAll").attr("checked", $chk.length == $chk.filter(":checked").length);
+            })
+        });
+    </script>
+	<!-- 
+	
+	
+	1、获取单个checkbox选中项(三种写法)
+$("input:checkbox:checked").val()
+或者
+$("input:[type='checkbox']:checked").val();
+或者
+$("input:[name='ck']:checked").val();
+2、 获取多个checkbox选中项
+$('input:checkbox').each(function() {
+        if ($(this).attr('checked') ==true) {
+                alert($(this).val());
+        }
+});
+3、设置第一个checkbox 为选中值
+$('input:checkbox:first').attr("checked",'checked');
+或者
+$('input:checkbox').eq(0).attr("checked",'true');
+4、设置最后一个checkbox为选中值
+$('input:radio:last').attr('checked', 'checked');
+或者
+$('input:radio:last').attr('checked', 'true');
+5、根据索引值设置任意一个checkbox为选中值
+$('input:checkbox).eq(索引值).attr('checked', 'true');索引值=0,1,2....
+或者
+$('input:radio').slice(1,2).attr('checked', 'true');
+6、选中多个checkbox同时选中第1个和第2个的checkbox
+$('input:radio').slice(0,2).attr('checked','true');
+7、根据Value值设置checkbox为选中值
+$("input:checkbox[value='1']").attr('checked','true');
+8、删除Value=1的checkbox
+$("input:checkbox[value='1']").remove();
+9、删除第几个checkbox
+$("input:checkbox").eq(索引值).remove();索引值=0,1,2....
+如删除第3个checkbox:
+$("input:checkbox").eq(2).remove();
+10、遍历checkbox
+$('input:checkbox').each(function (index, domEle) {
+//写入代码
+});
+11、全部选中
+$('input:checkbox').each(function() {
+        $(this).attr('checked', true);
+});
+12、全部取消选择
+$('input:checkbox').each(function () {
+        $(this).attr('checked',false);
+});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	-->
+</body>
+</html>

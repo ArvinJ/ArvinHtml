@@ -1,0 +1,58 @@
+﻿<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+  <script type="text/javascript">
+ 
+  
+  function pre1(){
+  var val=$('input:radio[name="Fruit"]:checked').val();
+ // $('input:radio:checked').val()；
+ // $("input[type='radio']:checked").val();
+ // $("input[name='Fruit']:checked").val();
+  alert("当前水果："+val);
+  }
+  
+  $(function(){
+  $("#difficulty").change(function(){
+	
+  //获取select 选中的 text :
+    var temp1 =  $("#difficulty").find("option:selected").text();
+   
+//获取select选中的 value:
+    var temp2= $("#difficulty").val();
+	alert("temp1"+temp1+"temp2:"+temp2);
+  })
+  
+  
+  
+  
+  });
+  
+</script>
+ 
+<body>
+<label><input name="Fruit" type="radio" value="1"  />苹果 </label> 
+<label><input name="Fruit" type="radio" value="2" />桃子 </label> 
+<label><input name="Fruit" type="radio" value="3"  checked="true" />香蕉 </label> 
+<label><input name="Fruit" type="radio" value="4" />梨 </label> 
+<label><input name="Fruit" type="radio" value="5" />其它 </label> 
+ <a class="btn-lit" href="javascript:pre1();" id="closeIframe">水果value?</a>
+ <p></p>
+ <br>
+ <br>
+
+ 
+ <select id="difficulty" name="difficulty" class="select-normal">
+									<option value=''>请选择</option>
+									<option value='1'>容易</option>
+									<option value='2'>简单</option>
+									<option value='3'>一般</option>
+									<option value='4'>偏难</option>
+									<option value='5'>困难</option>
+								</select>
+ 
+ 
+</body>
+
+</html>
